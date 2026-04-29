@@ -1,0 +1,160 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 240px;
+  background: #111827;
+  border-right: 1px solid rgba(248, 250, 252, 0.08);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.admin-sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(248, 250, 252, 0.08);
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-brand-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 118, 110, 1) 0%,
+    rgba(20, 184, 166, 1) 100%
+  );
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  color: #F8FAFC;
+}
+
+.admin-brand-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: #f8fafc;
+}
+
+.admin-brand-subtitle {
+  font-size: 11px;
+  color: rgba(248, 250, 252, 0.65);
+}
+
+.admin-nav {
+  flex: 1;
+  padding: 16px 12px;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  color: rgba(248, 250, 252, 0.72);
+  background: transparent;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.15s ease;
+}
+
+.admin-nav-link:hover {
+  color: #f8fafc;
+  background: rgba(15, 118, 110, 0.22);
+}
+
+.admin-nav-link.active {
+  color: #f8fafc;
+  background: #0f766e;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 118, 110, 1) 0%,
+    rgba(20, 184, 166, 1) 100%
+  );
+  font-weight: 600;
+}
+
+.admin-user-box {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(248, 250, 252, 0.08);
+}
+
+.admin-user-info {
+  margin-bottom: 12px;
+}
+
+.admin-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.admin-user-role {
+  font-size: 11px;
+  color: rgba(248, 250, 252, 0.6);
+  text-transform: capitalize;
+}
+
+.admin-logout-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 32px;
+  overflow-x: hidden;
+}
+
+.admin-nav-icon {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .admin-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px;
+  }
+
+  .admin-nav-link {
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .admin-main {
+    padding: 20px;
+  }
+}

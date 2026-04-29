@@ -1,0 +1,103 @@
+.setores-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+}
+
+.setores-table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.setores-edit-row {
+  display: flex;
+  gap: 8px;
+}
+
+.setores-edit-input {
+  height: 32px;
+}
+
+.setores-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.setores-status-ativo {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.setores-status-inativo {
+  background: var(--bg-elevated);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.setores-data {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.setores-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.setores-toggle-button-danger {
+  color: var(--danger);
+}
+
+.setores-toggle-button-success {
+  color: var(--success);
+}
+
+.setores-card-title {
+  font-size: 14px;
+  font-family: var(--font-display);
+  margin-bottom: 18px;
+}
+
+.setores-create-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.setores-rules-card {
+  margin-top: 16px;
+  background: transparent;
+  border: 1px dashed var(--border);
+}
+
+.setores-rules-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.setores-rules-list {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-left: 16px;
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+  .setores-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .setores-edit-row,
+  .setores-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

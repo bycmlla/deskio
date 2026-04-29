@@ -1,0 +1,203 @@
+.chamado-admin-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.chamado-admin-header-content {
+  flex: 1;
+}
+
+.chamado-admin-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chamado-admin-protocolo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.chamado-admin-subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.chamado-admin-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+}
+
+.chamado-admin-card {
+  margin-bottom: 16px;
+}
+
+.chamado-admin-section-title {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.chamado-admin-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.chamado-admin-info-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.chamado-admin-info-value {
+  font-size: 13px;
+}
+
+.chamado-admin-description {
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.chamado-admin-empty {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 16px;
+  position: relative;
+}
+
+.timeline-marker-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--event-color);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.timeline-line {
+  width: 1px;
+  flex: 1;
+  background: var(--border);
+  margin-top: 4px;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--event-color);
+  margin-bottom: 2px;
+}
+
+.timeline-description {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.timeline-meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+
+.observacoes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.observacao-item {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--warning);
+}
+
+.observacao-text {
+  font-size: 13px;
+}
+
+.observacao-meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
+.observacao-textarea {
+  margin-bottom: 10px;
+}
+
+.chamado-admin-select {
+  margin-bottom: 12px;
+}
+
+.chamado-admin-full-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.tecnico-atual {
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.tecnico-atual-vazio {
+  color: var(--text-dim);
+}
+
+@media (max-width: 900px) {
+  .chamado-admin-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .chamado-admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .chamado-admin-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chamado-admin-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

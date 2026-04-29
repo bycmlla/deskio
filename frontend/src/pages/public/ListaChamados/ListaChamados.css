@@ -1,0 +1,61 @@
+.lista-chamados-filters-row {
+  margin-bottom: 16px;
+}
+
+.lista-chamados-status-select {
+  max-width: 200px;
+}
+
+.lista-chamados-table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.lista-chamados-row {
+  cursor: pointer;
+}
+
+.lista-chamados-protocolo {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.lista-chamados-titulo-cell {
+  max-width: 280px;
+}
+
+.lista-chamados-titulo {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lista-chamados-data {
+  color: var(--text-muted);
+}
+
+.lista-chamados-paginacao {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.lista-chamados-paginacao-texto {
+  padding: 6px 14px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .lista-chamados-status-select {
+    max-width: 100%;
+  }
+
+  .lista-chamados-paginacao {
+    flex-wrap: wrap;
+  }
+}

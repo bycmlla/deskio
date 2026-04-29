@@ -1,0 +1,77 @@
+.lista-chamados-filtros-card {
+  margin-bottom: 20px;
+  padding: 16px;
+}
+
+.lista-chamados-filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.lista-chamados-filtros-actions {
+  margin-top: 12px;
+}
+
+.lista-chamados-table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.lista-chamados-protocolo {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.lista-chamados-titulo-cell {
+  max-width: 220px;
+}
+
+.lista-chamados-titulo {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lista-chamados-muted {
+  color: var(--text-muted);
+}
+
+.lista-chamados-tecnico {
+  color: var(--text);
+}
+
+.lista-chamados-tecnico-vazio {
+  color: var(--text-dim);
+}
+
+.lista-chamados-data {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.lista-chamados-paginacao {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.lista-chamados-paginacao-texto {
+  padding: 6px 14px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .lista-chamados-filtros-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lista-chamados-paginacao {
+    flex-wrap: wrap;
+  }
+}
