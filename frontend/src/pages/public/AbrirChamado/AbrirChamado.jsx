@@ -7,9 +7,12 @@ import api from "../../../services/api";
 import PublicLayout from "../../../components/PublicLayout/PublicLayout";
 import "./AbrirChamado.css";
 
+const EMPRESA_FIXA = {
+  nome: "JTD Transportes LTDA",
+  documento: "18.805.360/0001-26",
+};
+
 const schema = z.object({
-  empresa_nome: z.string().min(2, "Nome da empresa obrigatório"),
-  empresa_documento: z.string().min(11, "CNPJ ou CPF obrigatório").max(18),
   setor_id: z.string().min(1, "Selecione um setor"),
   solicitante_nome: z.string().min(2, "Nome do solicitante obrigatório"),
   solicitante_whatsapp: z
@@ -18,6 +21,10 @@ const schema = z.object({
     .regex(/^[\d\s\+\-\(\)]{10,20}$/, "WhatsApp inválido"),
   titulo: z.string().min(5, "Título obrigatório (mín. 5 caracteres)"),
   descricao: z.string().min(10, "Descrição deve ter no mínimo 10 caracteres"),
+  prioridade: z.enum(["Baixa", "Média", "Alta"], {
+    required_error: "Selecione o nível de prioridade",
+    invalid_type_error: "Selecione o nível de prioridade",
+  }),
 });
 
 export default function AbrirChamado() {
@@ -29,8 +36,14 @@ export default function AbrirChamado() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: { prioridade: "Baixa" },
+  });
+
+  const prioridadeSelecionada = watch("prioridade");
 
   useEffect(() => {
     api
@@ -48,8 +61,14 @@ export default function AbrirChamado() {
     setLoading(true);
     setApiError("");
 
+    const payload = {
+      ...data,
+      empresa_nome: EMPRESA_FIXA.nome,
+      empresa_documento: EMPRESA_FIXA.documento,
+    };
+
     try {
-      const res = await api.post("/chamados", data);
+      const res = await api.post("/chamados", payload);
 
       navigate(`/chamado/confirmacao/${res.data.protocolo}`, {
         state: res.data,
@@ -80,36 +99,20 @@ export default function AbrirChamado() {
           <div className="card abrir-chamado-card">
             <h3 className="abrir-chamado-section-title">Dados da Empresa</h3>
 
+            <div className="abrir-chamado-empresa-fixa">
+              <div>
+                <span className="abrir-chamado-empresa-label">Empresa</span>
+                <strong>{EMPRESA_FIXA.nome}</strong>
+              </div>
+
+              <div>
+                <span className="abrir-chamado-empresa-label">CNPJ</span>
+                <strong>{EMPRESA_FIXA.documento}</strong>
+              </div>
+            </div>
+
             <div className="abrir-chamado-form-grid">
               <div className="form-group abrir-chamado-full-row">
-                <label>Nome da Empresa *</label>
-
-                <input
-                  {...register("empresa_nome")}
-                  placeholder="Razão social ou nome fantasia"
-                />
-
-                {errors.empresa_nome && (
-                  <p className="error-msg">{errors.empresa_nome.message}</p>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label>CNPJ ou CPF *</label>
-
-                <input
-                  {...register("empresa_documento")}
-                  placeholder="00.000.000/0000-00"
-                />
-
-                {errors.empresa_documento && (
-                  <p className="error-msg">
-                    {errors.empresa_documento.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="form-group">
                 <label>Setor *</label>
 
                 <select {...register("setor_id")}>
@@ -194,6 +197,25 @@ export default function AbrirChamado() {
 
               {errors.descricao && (
                 <p className="error-msg">{errors.descricao.message}</p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label>Nível de prioridade *</label>
+
+              <select
+                {...register("prioridade")}
+                className={`abrir-chamado-prioridade-select prioridade-${
+                  prioridadeSelecionada || "Baixa"
+                }`}
+              >
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+              </select>
+
+              {errors.prioridade && (
+                <p className="error-msg">{errors.prioridade.message}</p>
               )}
             </div>
           </div>

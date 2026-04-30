@@ -7,6 +7,8 @@ import {
 import { gerarProtocolo } from "../utils/protocolo.js";
 import { Op } from "sequelize";
 
+const PRIORIDADES_VALIDAS = ["Baixa", "Média", "Alta"];
+
 export async function criarChamado(req, res) {
   try {
     const {
@@ -17,6 +19,7 @@ export async function criarChamado(req, res) {
       solicitante_whatsapp,
       titulo,
       descricao,
+      prioridade
     } = req.body;
 
     if (
@@ -26,11 +29,17 @@ export async function criarChamado(req, res) {
       !solicitante_nome ||
       !solicitante_whatsapp ||
       !titulo ||
-      !descricao
+      !descricao ||
+      !prioridade
     ) {
       return res
         .status(400)
         .json({ error: "Todos os campos são obrigatórios" });
+    }
+     if (!PRIORIDADES_VALIDAS.includes(prioridade)) {
+      return res.status(400).json({
+        error: "Prioridade inválida. Use Baixa, Média ou Alta.",
+      });
     }
     if (descricao.length < 10) {
       return res
@@ -57,6 +66,7 @@ export async function criarChamado(req, res) {
       solicitante_whatsapp: wppClean,
       titulo,
       descricao,
+      prioridade,
       status: "Aberto",
       data_abertura: new Date(),
       data_atualizacao: new Date(),
@@ -67,6 +77,7 @@ export async function criarChamado(req, res) {
       usuario_id: null,
       tipo_evento: "criacao",
       descricao: "Chamado criado pelo solicitante",
+      prioridade,
       data_evento: new Date(),
     });
 
@@ -74,6 +85,7 @@ export async function criarChamado(req, res) {
       protocolo: chamado.protocolo,
       solicitante_nome: chamado.solicitante_nome,
       titulo: chamado.titulo,
+      prioridade: chamado.prioridade,
       status: chamado.status,
     });
   } catch (err) {
@@ -98,6 +110,7 @@ export async function buscarChamadoPorProtocolo(req, res) {
     return res.json({
       protocolo: chamado.protocolo,
       status: chamado.status,
+      prioridade: chamado.prioridade,
       titulo: chamado.titulo,
       solicitante_nome: chamado.solicitante_nome,
       setor: chamado.setor?.nome,
@@ -113,13 +126,23 @@ export async function buscarChamadoPorProtocolo(req, res) {
 
 export async function listarChamadosPublicos(req, res) {
   try {
-    const { status, page = 1, limit = 20 } = req.query;
+    const { status, prioridade, page = 1, limit = 20 } = req.query;
     const where = {};
     if (status) where.status = status;
 
+     if (prioridade) {
+      if (!PRIORIDADES_VALIDAS.includes(prioridade)) {
+        return res.status(400).json({
+          error: "Prioridade inválida. Use Baixa, Média ou Alta.",
+        });
+      }
+
+      where.prioridade = prioridade;
+    }
+
     const chamados = await Chamado.findAndCountAll({
       where,
-      attributes: ["protocolo", "titulo", "status", "data_abertura"],
+      attributes: ["protocolo", "titulo", "status",  "prioridade", "data_abertura"],
       order: [["data_abertura", "DESC"]],
       limit: Number(limit),
       offset: (Number(page) - 1) * Number(limit),

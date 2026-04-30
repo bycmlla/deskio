@@ -42,6 +42,11 @@ export const Chamado = sequelize.define(
     solicitante_whatsapp: { type: DataTypes.STRING(20), allowNull: false },
     titulo: { type: DataTypes.STRING(200), allowNull: false },
     descricao: { type: DataTypes.TEXT, allowNull: false },
+    prioridade: {
+      type: DataTypes.ENUM("Baixa", "Média", "Alta"),
+      allowNull: false,
+      defaultValue: "Baixa",
+    },
     status: {
       type: DataTypes.ENUM("Aberto", "Em andamento", "Fechado"),
       defaultValue: "Aberto",
@@ -63,6 +68,10 @@ export const HistoricoChamado = sequelize.define(
     usuario_id: { type: DataTypes.INTEGER, allowNull: true },
     tipo_evento: { type: DataTypes.STRING(50), allowNull: false },
     descricao: { type: DataTypes.TEXT, allowNull: false },
+    prioridade: {
+      type: DataTypes.ENUM("Baixa", "Média", "Alta"),
+      allowNull: true,
+    },
     data_evento: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
   { timestamps: false, tableName: "historico_chamados" },

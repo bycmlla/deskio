@@ -53,3 +53,59 @@
     grid-template-columns: 1fr;
   }
 }
+.abrir-chamado-empresa-fixa {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-main);
+}
+
+.abrir-chamado-empresa-fixa > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.abrir-chamado-empresa-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.abrir-chamado-empresa-fixa strong {
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+@media (max-width: 640px) {
+  .abrir-chamado-empresa-fixa {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.abrir-chamado-prioridade-select {
+  font-weight: 600;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.abrir-chamado-prioridade-select.prioridade-Baixa {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.abrir-chamado-prioridade-select.prioridade-Média {
+  border-color: #f59e0b;
+  background-color: #fffbeb;
+  color: #b45309;
+}
+
+.abrir-chamado-prioridade-select.prioridade-Alta {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
