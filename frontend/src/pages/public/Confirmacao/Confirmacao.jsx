@@ -20,6 +20,11 @@ export default function Confirmacao() {
 
   const protocoloAtual = protocolo || dados?.protocolo;
 
+  const cpfAtual =
+    location.state?.solicitante_cpf ||
+    sessionStorage.getItem("cpf_chamados") ||
+    "";
+
   return (
     <PublicLayout>
       <div className="confirmacao-container">
@@ -61,7 +66,7 @@ export default function Confirmacao() {
 
         <div className="confirmacao-actions">
           <Link
-            to={`/chamado/${protocoloAtual}`}
+            to={`/chamado/${protocoloAtual}?cpf=${cpfAtual}`}
             className="btn btn-primary"
           >
             Acompanhar Chamado

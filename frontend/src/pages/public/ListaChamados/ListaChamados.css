@@ -50,6 +50,24 @@
   font-size: 13px;
 }
 
+.lista-chamados-cpf-card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.lista-chamados-cpf-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lista-chamados-filters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 @media (max-width: 640px) {
   .lista-chamados-status-select {
     max-width: 100%;
@@ -57,5 +75,10 @@
 
   .lista-chamados-paginacao {
     flex-wrap: wrap;
+  }
+  
+  .lista-chamados-filters-row {
+    align-items: stretch;
+    flex-direction: column;
   }
 }

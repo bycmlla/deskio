@@ -33,15 +33,49 @@ export const UsuarioAdmin = sequelize.define(
 export const Chamado = sequelize.define(
   "chamado",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    protocolo: { type: DataTypes.STRING(20), allowNull: false, unique: true },
-    empresa_nome: { type: DataTypes.STRING(150), allowNull: false },
-    empresa_documento: { type: DataTypes.STRING(20), allowNull: false },
-    setor_id: { type: DataTypes.INTEGER, allowNull: false },
-    solicitante_nome: { type: DataTypes.STRING(100), allowNull: false },
-    solicitante_whatsapp: { type: DataTypes.STRING(20), allowNull: false },
-    titulo: { type: DataTypes.STRING(200), allowNull: false },
-    descricao: { type: DataTypes.TEXT, allowNull: false },
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    protocolo: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      unique: true,
+    },
+    empresa_nome: {
+      type: DataTypes.STRING(150),
+      allowNull: false,
+    },
+    empresa_documento: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    setor_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    solicitante_nome: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    solicitante_cpf: {
+      type: DataTypes.STRING(11),
+      allowNull: false,
+    },
+
+    solicitante_whatsapp: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    titulo: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+    },
+    descricao: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     prioridade: {
       type: DataTypes.ENUM("Baixa", "Média", "Alta"),
       allowNull: false,
@@ -51,11 +85,26 @@ export const Chamado = sequelize.define(
       type: DataTypes.ENUM("Aberto", "Em andamento", "Fechado"),
       defaultValue: "Aberto",
     },
-    tecnico_id: { type: DataTypes.INTEGER, allowNull: true },
-    data_abertura: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    data_inicio_atendimento: { type: DataTypes.DATE, allowNull: true },
-    data_fechamento: { type: DataTypes.DATE, allowNull: true },
-    data_atualizacao: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    tecnico_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    data_abertura: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    data_inicio_atendimento: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    data_fechamento: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    data_atualizacao: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
   },
   { timestamps: false, tableName: "chamado" },
 );

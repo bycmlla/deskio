@@ -12,15 +12,54 @@ const EMPRESA_FIXA = {
   documento: "18.805.360/0001-26",
 };
 
+function validarCPF(cpf) {
+  const cpfLimpo = cpf.replace(/\D/g, "");
+
+  if (cpfLimpo.length !== 11) return false;
+  if (/^(\d)\1{10}$/.test(cpfLimpo)) return false;
+
+  let soma = 0;
+
+  for (let i = 0; i < 9; i++) {
+    soma += Number(cpfLimpo[i]) * (10 - i);
+  }
+
+  let resto = (soma * 10) % 11;
+  if (resto === 10) resto = 0;
+
+  if (resto !== Number(cpfLimpo[9])) return false;
+
+  soma = 0;
+
+  for (let i = 0; i < 10; i++) {
+    soma += Number(cpfLimpo[i]) * (11 - i);
+  }
+
+  resto = (soma * 10) % 11;
+  if (resto === 10) resto = 0;
+
+  return resto === Number(cpfLimpo[10]);
+}
+
 const schema = z.object({
   setor_id: z.string().min(1, "Selecione um setor"),
+
   solicitante_nome: z.string().min(2, "Nome do solicitante obrigatório"),
+
+  solicitante_cpf: z
+    .string()
+    .min(11, "CPF obrigatório")
+    .refine((cpf) => validarCPF(cpf), "CPF inválido"),
+
   solicitante_whatsapp: z
     .string()
     .min(10, "WhatsApp inválido")
     .regex(/^[\d\s\+\-\(\)]{10,20}$/, "WhatsApp inválido"),
+
   titulo: z.string().min(5, "Título obrigatório (mín. 5 caracteres)"),
+
   descricao: z.string().min(10, "Descrição deve ter no mínimo 10 caracteres"),
+
   prioridade: z.enum(["Baixa", "Média", "Alta"], {
     required_error: "Selecione o nível de prioridade",
     invalid_type_error: "Selecione o nível de prioridade",
@@ -57,12 +96,19 @@ export default function AbrirChamado() {
       });
   }, []);
 
+  function limparCPF(cpf) {
+    return String(cpf || "").replace(/\D/g, "");
+  }
+
   async function onSubmit(data) {
     setLoading(true);
     setApiError("");
 
+    const cpfLimpo = limparCPF(data.solicitante_cpf);
+
     const payload = {
       ...data,
+      solicitante_cpf: cpfLimpo,
       empresa_nome: EMPRESA_FIXA.nome,
       empresa_documento: EMPRESA_FIXA.documento,
     };
@@ -70,12 +116,17 @@ export default function AbrirChamado() {
     try {
       const res = await api.post("/chamados", payload);
 
+      sessionStorage.setItem("cpf_chamados", cpfLimpo);
+
       navigate(`/chamado/confirmacao/${res.data.protocolo}`, {
-        state: res.data,
+        state: {
+          ...res.data,
+          solicitante_cpf: cpfLimpo,
+        },
       });
     } catch (err) {
       setApiError(
-        err.response?.data?.error || "Erro ao abrir chamado. Tente novamente."
+        err.response?.data?.error || "Erro ao abrir chamado. Tente novamente.",
       );
     } finally {
       setLoading(false);
@@ -148,6 +199,19 @@ export default function AbrirChamado() {
 
                 {errors.solicitante_nome && (
                   <p className="error-msg">{errors.solicitante_nome.message}</p>
+                )}
+              </div>
+
+              <div className="form-group abrir-chamado-full-row">
+                <label>CPF *</label>
+
+                <input
+                  {...register("solicitante_cpf")}
+                  placeholder="000.000.000-00"
+                />
+
+                {errors.solicitante_cpf && (
+                  <p className="error-msg">{errors.solicitante_cpf.message}</p>
                 )}
               </div>
 
