@@ -1,10 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
 
-  base: "/deskio/",
+  base: mode === "production" ? "/deskio/" : "/",
 
   server: {
     port: 3000,
@@ -15,4 +15,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));
