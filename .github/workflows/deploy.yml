@@ -35,6 +35,9 @@ jobs:
         working-directory: ./frontend
         run: npm run build
 
+      - name: Criar fallback para rotas React
+        run: cp ./frontend/dist/index.html ./frontend/dist/404.html
+
       - name: Enviar build para o GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:

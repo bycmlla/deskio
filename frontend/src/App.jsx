@@ -25,7 +25,7 @@ function PublicOnlyRoute({ children }) {
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<AbrirChamado />} />
           <Route path="/chamado/confirmacao/:protocolo" element={<Confirmacao />} />
