@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api' });
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || '/api',
+});
 
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('helpdesk_token');
@@ -11,11 +13,16 @@ api.interceptors.request.use(config => {
 api.interceptors.response.use(
   res => res,
   err => {
-    if (err.response?.status === 401 && window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
+    if (
+      err.response?.status === 401 &&
+      window.location.pathname.startsWith('/admin') &&
+      window.location.pathname !== '/admin/login'
+    ) {
       localStorage.removeItem('helpdesk_token');
       localStorage.removeItem('helpdesk_usuario');
-      window.location.href = '/admin/login';
+      window.location.href = `${import.meta.env.BASE_URL}admin/login`;
     }
+
     return Promise.reject(err);
   }
 );
