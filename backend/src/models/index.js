@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../database.js";
 
 export const Setor = sequelize.define(
-  "setor",
+  "Setor",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     nome: { type: DataTypes.STRING(100), allowNull: false },
@@ -10,7 +10,7 @@ export const Setor = sequelize.define(
     data_criacao: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     data_atualizacao: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
-  { timestamps: false, tableName: "setor" },
+  { timestamps: false, tableName: "setores" },
 );
 
 export const UsuarioAdmin = sequelize.define(
@@ -31,7 +31,7 @@ export const UsuarioAdmin = sequelize.define(
 );
 
 export const Chamado = sequelize.define(
-  "chamado",
+  "Chamado",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -106,7 +106,7 @@ export const Chamado = sequelize.define(
       defaultValue: DataTypes.NOW,
     },
   },
-  { timestamps: false, tableName: "chamado" },
+  { timestamps: false, tableName: "chamados" },
 );
 
 export const HistoricoChamado = sequelize.define(
